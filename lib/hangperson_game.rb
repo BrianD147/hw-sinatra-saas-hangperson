@@ -32,7 +32,10 @@ class HangpersonGame
   end
   
   def guess(letter)
-  # Need to fill in 
+    if @word.include? letter
+  		@guesses = letter
+  	  return true
+  	end
   end
 
 end
