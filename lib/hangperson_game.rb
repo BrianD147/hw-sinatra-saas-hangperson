@@ -16,7 +16,6 @@ class HangpersonGame
     @word = word
     @guesses = ''
     @wrong_guesses = ''
-    @word_with_guesses = ''
   end
 
   # You can test it by running $ bundle exec irb -I. -r app.rb
@@ -31,11 +30,47 @@ class HangpersonGame
     }
   end
   
-  def guess(letter)
+  def guess (letter)
+    
+    if @guesses.include? letter or @wrong_guesses.include? letter
+		  return false
+    end
+    
     if @word.include? letter
-  		@guesses = letter
+  		@guesses = @guesses + letter
+  	  return true
+  	else
+  	  @wrong_guesses = @wrong_guesses + letter
   	  return true
   	end
+  end
+  
+  def word_with_guesses
+  	result = ""
+    
+    # for each letter in word
+    @word.each_char do |letter| 
+     # if the letter is contained within @guesses
+     if @guesses.include? letter
+       result.concat letter
+     else
+       result.concat '-'
+     end
+    end
+    
+    return result
+  end
+  
+  def check_win_or_lose
+	  if @wrong_guesses.length >= 7
+		  return :lose
+	  end
+	
+	  if word_with_guesses == @word
+		  return :win
+	  end
+	
+	  :play
   end
 
 end
