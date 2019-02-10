@@ -32,11 +32,11 @@ class HangpersonGame
   
   def guess (letter)
     
-    letter = letter.downcase
-    
     if char.nil? or /[^A-Za-z]/.match(char) != nil or char == ''
   		raise ArgumentError.new("Not a valid letter")
     end
+    
+    letter = letter.downcase
     
     if @guesses.include? letter or @wrong_guesses.include? letter
 		  return false
